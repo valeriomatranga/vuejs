@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Intro</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+        integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <style>
+        #app {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        img {
+            width: 600px;
+            height: 400px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="app">
+
+        <div class="prev" @click="prev">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <img :src="images[counter]" alt="">
+        <div class="next" @click="next">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+
+    </div>
+
+
+
+    <!-- VUE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+    <!-- Il nostro script main.js -->
+    <script src="./main.js"></script>
+</body>
+
+</html>
