@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue TODO</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+        integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <div class="logo">
+            <img width="120" :src="logo" alt="">
+        </div>
+        <div class="add_task">
+            <input v-model="newTask" placeholder="Add your task here">
+            <button @click="addTask">Add Task</button>
+        </div>
+
+        <div class="tasks" v-if="tasks.length > 0">
+            <div class="task" v-for="(task, index) in tasks">{{task}}
+                <i class="fas fa-times-circle fa-sm fa-fw" @click="removeTask(index)"></i>
+            </div>
+        </div>
+        <div class="no_tasks" v-else>
+            <p>Nothing to do</p>
+        </div>
+
+    </div>
+
+    <!-- VUE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="./main.js"></script>
+</body>
+
+</html>
