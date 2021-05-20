@@ -6,11 +6,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue TODO</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
-        integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: aliceblue;
+        }
+        .d_flex{
+            display: flex
+        }
+        #app{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            display: flex;
+        }
+        .add_task{
+            margin: 1rem;
+        }
+        .task>input {
+            border-style: none;
+            background-color: transparent;
+        } 
 
+        .tasks, .no_tasks, .completed_tasks,.trash {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            margin: 0.5rem;
+        }
+
+        .error{
+            color: red;
+        }
+        .empty_trash{
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            text-decoration: underline;
+        }
     </style>
 
 </head>
@@ -22,21 +66,47 @@
             <img width="120" :src="logo" alt="">
         </div>
         <div class="add_task">
-            <input v-model="newTask" placeholder="Add your task here">
+            <input v-model="newTask" placeholder="Add your task here" @keyup.enter="addTask">
             <button @click="addTask">Add Task</button>
-        </div>
-
-        <div class="tasks" v-if="tasks.length > 0">
-            <div class="task" v-for="(task, index) in tasks">{{task}}
-                <i class="fas fa-times-circle fa-sm fa-fw" @click="removeTask(index)"></i>
+            <div v-if="error.length > 0">
+                <small class="error">{{error}}</small>
             </div>
         </div>
-        <div class="no_tasks" v-else>
-            <p>Nothing to do</p>
-        </div>
+        
+        <div class="container">
 
-    </div>
+            <div class="tasks" v-if="tasks.length > 0">
+                <h3>Todo</h3>
+                
+                <!-- .task -->
+                <div class="task" v-for="(task, index) in tasks">
+                    <input v-model="tasks[index]" @keyup.enter="updateTask">
+                    <i class="fas fa-check-circle fa-sm fa-fw" @click="completeTask(index, task)"></i>
+                    <i class="fas fa-times-circle fa-sm fa-fw" @click="removeTask(index, task)"></i>
+                </div>
+                <!-- .task -->
+            </div>
+            <div class="no_tasks" v-else>
+                <p>Nothing to do</p>
+            </div>
 
+            <div class="completed_tasks" v-if="completedTasks.length > 0">
+                <h3>Completed Tasks</h3>
+                <div v-for="(task, index) in completedTasks">
+                    {{ task }} <i class="fas fa-undo fa-sm fa-fw" @click="restoreCompletedTask(index, task)"></i>
+                </div>
+            </div>
+            <div class="trash" v-if="trash.length > 0">
+                <div class="d_flex">
+                    <h3>Trash</h3>
+                    <span @click="emptyTrash" class="empty_trash">Empty Trash</span>
+                </div>
+                <div v-for="(task, index) in trash">
+                    {{ task }} <i class="fas fa-trash-restore" @click="restoreTrashedTasks(index, task)"></i>
+                </div>
+            </div>
+            </div>
+            </div>
     <!-- VUE JS -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="./main.js"></script>
