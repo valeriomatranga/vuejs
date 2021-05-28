@@ -3,7 +3,7 @@ const app = new Vue({
     data: {
         url: 'https://api.openweathermap.org/data/2.5/forecast',
         query: 'Norwich',
-        apiKey: 'a24da99920814dac10773c623bd902db',
+        apiKey: 'YOUR_API_TOKEN_HERE',
         units: 'metric',
         forecastData: '',
         cityData: '',
