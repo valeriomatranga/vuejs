@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoolzApp</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+        integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <div id="app">
+
+        <aside class="sidebar">
+            <div class="user bg_litegrey">
+                <img class="avatar" src="./assets/img/avatar_io.jpg" alt="">
+                <span class="user__name">Nome Utente</span>
+                <span class="user__icons">
+                    <i class="fas fa-circle-notch fa-lg fa-fw"></i>
+                    <i class="fas fa-comment fa-lg fa-fw"></i>
+                    <i class="fas fa-ellipsis-v fa-lg fa-fw"></i>
+                </span>
+            </div>
+            <!-- /.user -->
+            <div class="notifications bg_sky">
+                <span class="bell_circle"><i class="fas fa-bell-slash fa-2x fa-fw"></i></span>
+                <div class="notification_text">
+                    <p>Ricevi notifiche di nuovi messaggi</p>
+                    <a href="#">Attiva notifiche desktop</a>
+                </div>
+            </div>
+            <!-- /.notifications -->
+            <div class="search_contacts bg_litergrey">
+                <div class="searchbox">
+                    <i class="fas fa-search fa-lg fa-fw"></i>
+                    <input type="text" name="search-contact" placeholder="Cerca o inizia una nuova chat">
+                </div>
+            </div>
+            <!-- Milesone 2 -->
+            <div class="contacts">
+                <div class="contact" :class="index === currentContact ? 'active_contact' : '' "
+                    v-for="(contact,index) in contacts" @click="changeContact(index)">
+                    <img class="avatar" :src="'./assets/img/avatar'+ contact.avatar + '.jpg'" alt="">
+                    <span>{{contact.name}}</span>
+                </div>
+            </div>
+            <!-- /.contacts  -->
+
+        </aside>
+        <main class="main_content">
+
+            <div class="main_content__top bg_litegrey">
+                <img class="avatar" :src="'./assets/img/avatar' + contacts[currentContact].avatar + '.jpg'" alt="">
+                <span>{{contacts[currentContact].name}}</span>
+                <div class="top__icons">
+                    <i class="fas fa-search fa-lg fa-fw"></i>
+                    <i class="fas fa-paperclip fa-lg fa-fw"></i>
+                    <i class="fas fa-ellipsis-v fa-lg fa-fw"></i>
+                </div>
+            </div>
+            <div class="messages">
+                <!-- Milestone 2 -->
+                <div class="chat" :class="message.status === 'sent' ? 'sent_message' : 'received_message'"
+                    v-for="message in contacts[currentContact].messages">
+                    {{message.text}}
+                    <small class="date">{{message.date}}</small>
+                </div>
+            </div>
+            <div class="main_content__bottom">
+                <i class="fas fa-smile fa-2x fa-fw"></i>
+                <!-- Milestone 3 -->
+                <input type="text">
+                <i class="fas fa-microphone fa-2x fa-fw"></i>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- VUE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <!-- Day JS -->
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <!-- Js file -->
+    <script src="./assets/js/app.js"></script>
+</body>
+
+</html>
