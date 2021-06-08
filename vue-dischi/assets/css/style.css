@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1E2D3B;
+    color: white;
+}
+
+nav {
+    background-color: #2E3A46;
+    padding: 0.5rem;
+}
+
+.disks {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    justify-content: center;
+}
+
+.disk {
+    background-color: #2E3A46;
+    padding: 1rem;
+    margin: 0.5rem;
+    width: 200px;
+    text-align: center;
+
+}
+
+.disk>img {
+    max-width: 100%;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+}
+
+.disk>h3 {
+    text-transform: uppercase;
+    margin: 0.5rem 0;
+}
+
+.metadata {
+    color: #757779;
+}

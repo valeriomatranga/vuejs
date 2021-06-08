@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Dischi</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+        integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <nav>
+            <img src="./logo.png" alt="">
+            <div class="filters">
+                <div>
+                    <label for="genre">Select a genre</label>
+                    <select name="genre" id="genre" v-model="selected">
+                        <option disabled value="">Please select one</option>
+                        <option v-for="genre in genres" :value="genre">{{genre}}</option>
+                    </select>
+                </div>
+
+                <div class="sort" @click="sort(disks)">
+
+                    <i v-if="!sorted || sorted === 'ASC'" title="filter by year"
+                        class="fas fa-sort-numeric-down fa-lg fa-fw"></i>
+                    <i v-if="sorted === 'DESC'" title="filter by year" class="fas fa-sort-numeric-up fa-lg fa-fw"></i>
+                </div>
+            </div>
+        </nav>
+        <div class="disks" v-if="!error">
+
+            <div class="disk" v-for="disk in disks" :key="disk.title"
+                v-if="disk.genre === selected || selected === 'all' ">
+                <img class="poster" :src="disk.poster" alt="disk.title">
+                <h3 class="title">
+                    {{disk.title}}
+                </h3>
+                <div class="meta">
+                    <div class="author">{{disk.author}}</div>
+                    <div class="year">{{disk.year}}</div>
+                </div>
+            </div>
+        </div>
+        <div v-else>{{error}}</div>
+    </div>
+
+
+    <!-- VUE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <!-- Axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Js file -->
+    <script src="./main.js"></script>
+</body>
+
+</html>
